@@ -1,0 +1,8 @@
+#arquivos e pastas
+
+.env/
+model/databases.db 
+__pycache__/
+*.pyc
+*.pyo
+*.sqlite3
