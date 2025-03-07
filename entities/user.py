@@ -1,4 +1,5 @@
 from model.databases import RegisterUser, engine
+from model.databases import TransactionModel
 from sqlmodel import Session
 import bcrypt
 
@@ -16,6 +17,13 @@ class User:
             user = RegisterUser(name=name, cpf=cpf, email=email, password=set_password(password))
             session.add(user)
             session.commit()
+            session.refresh(user)
+
+            transaction = TransactionModel(user_id=user.user_id, balance=0)
+            session.add(transaction)
+            session.commit()
+
+            
 
 
 

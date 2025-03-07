@@ -14,7 +14,7 @@ class RegisterUser(SQLModel, table=True):
 class TransactionModel(SQLModel, table=True,):
     transaction_id: int = Field(primary_key=True)
     user_id: int = Field(foreign_key='registeruser.user_id')
-    balance: float
+    balance: float = Field(default=0)
 
 
 sqlite_file_name = 'model/databases.db'
