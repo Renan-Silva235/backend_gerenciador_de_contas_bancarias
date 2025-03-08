@@ -36,7 +36,7 @@ class User:
 
             if user is None:
                 print('cpf inválido')
-                return False
+                return None
             
 
         
@@ -44,11 +44,11 @@ class User:
             #verificando senha
             if bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8')):
                 print('login bem-sucedido')
-                return True
+                return user
 
             else:
                 print('senha inválida')
-                return False
+                return None
                 
           
 
