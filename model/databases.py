@@ -14,13 +14,13 @@ class RegisterUser(SQLModel, table=True):
 class TransactionModel(SQLModel, table=True,):
     transaction_id: int = Field(primary_key=True)
     user_id: int = Field(foreign_key='registeruser.user_id')
-    balance: float = Field(default=0)
+    balance: float = Field(default=0.0)
 
 
 sqlite_file_name = 'model/databases.db'
 connection_string = f'sqlite:///{sqlite_file_name}'
 
-engine = create_engine(connection_string, echo=False)
+engine = create_engine(connection_string, echo=True)
 
 if __name__ == '__main__':
     SQLModel.metadata.create_all(engine)
