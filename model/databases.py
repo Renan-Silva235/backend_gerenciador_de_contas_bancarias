@@ -1,5 +1,4 @@
 from sqlmodel import SQLModel, Field, create_engine
-from pydantic import EmailStr
 
 
 class RegisterUser(SQLModel, table=True):
