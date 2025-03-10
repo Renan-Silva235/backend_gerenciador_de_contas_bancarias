@@ -2,19 +2,21 @@ from model.databases import RegisterUser, engine
 from model.databases import TransactionModel
 from sqlmodel import Session
 import bcrypt
-
+from validations.validate_password import set_password
+from validations.validate_email import valid_email
 
 
 class User:
     def register_user(self, name, cpf, email, password):
-
-        def set_password(password):
-            #criptografa a senha
-            hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
-            return hashed_password.decode('utf-8')
         
         with Session(engine) as session:
-            user = RegisterUser(name=name, cpf=cpf, email=email, password=set_password(password))
+
+            email_validated = valid_email(email)
+
+            if email_validated is None:
+                return 'E-mail-inválido'
+            
+            user = RegisterUser(name=name.title(), cpf=cpf, email=email_validated, password=set_password(password))
             session.add(user)
             session.commit()
             session.refresh(user)
@@ -39,8 +41,6 @@ class User:
                 return None
             
 
-        
-    
             #verificando senha
             if bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8')):
                 print('login bem-sucedido')
