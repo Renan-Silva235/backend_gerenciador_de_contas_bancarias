@@ -1,6 +1,6 @@
 from model.databases import RegisterUser, TransactionModel, RegisterUser, engine
-from sqlmodel import Session, select
-from entities.user import User
+from sqlmodel import Session
+
 
 
 class Transaction:
