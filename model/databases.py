@@ -6,7 +6,7 @@ class RegisterUser(SQLModel, table=True):
     user_id: int = Field(primary_key=True)
     name: str = Field(max_length=30)
     cpf: str = Field(max_length=11)
-    email: EmailStr = Field()
+    email: str = Field()
     password: str = Field(max_length=4)
 
 
