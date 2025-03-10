@@ -6,3 +6,6 @@ __pycache__/
 *.pyc
 *.pyo
 *.sqlite3
+
+lembranca.txt
+teste.py
