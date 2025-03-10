@@ -1,5 +1,6 @@
 from model.databases import RegisterUser, TransactionModel, RegisterUser, engine
 from sqlmodel import Session
+from query.query_target_user import query_target_user
 
 
 
@@ -14,6 +15,9 @@ class Transaction:
                 session.commit()
 
     
+    
+    
+    
     def get_balance(self, user: RegisterUser):
         with Session(engine) as session:
             balance = session.query(TransactionModel).filter(TransactionModel.user_id == user.user_id).first()
@@ -25,6 +29,11 @@ class Transaction:
                 return 'CPF INVÁLIDO'
             
 
+    
+    
+    
+    
+    
     def withdraw_money(self, user:RegisterUser, value: float):
          with Session(engine) as session:
             withdraw = session.query(TransactionModel).filter(TransactionModel.user_id == user.user_id).first()
@@ -35,27 +44,14 @@ class Transaction:
                 session.commit()
 
 
+    
+    
+    
+    
+    
+    
+    
     def transfer(self, user:RegisterUser, cpf, value):
-
-
-
-        
-        def query_target_user(cpf:str, value):
-            with Session(engine) as target_session:
-                target_user = target_session.query(RegisterUser).filter(RegisterUser.cpf == cpf).first()
-
-                if target_user:
-                    target_transaction = target_session.query(TransactionModel).filter(TransactionModel.user_id == target_user.user_id).first()
-
-                    if target_transaction:
-                        target_transaction.balance += value
-                        target_session.add(target_transaction)
-                        target_session.commit()
-                        
-            return True
-                
-
-
 
         with Session(engine) as session:
             query_balance = session.query(TransactionModel).filter(TransactionModel.user_id == user.user_id).first()
