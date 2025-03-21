@@ -4,6 +4,7 @@ from query.query_target_user import query_target_user
 
 
 
+
 class Transaction:
     def deposit(self,user: RegisterUser, value: float):
         with Session(engine) as session:
@@ -23,21 +24,13 @@ class Transaction:
             balance = session.query(TransactionModel).filter(TransactionModel.user_id == user.user_id).first()
 
             if balance:
-                return f'saldo: R${balance.balance:.2f}'
+                return f'saldo: R${balance.balance}'
                 
             else:
                 return 'CPF INVÁLIDO'
             
 
-            
-print('ola')
-            
 
-    
-    
-    
-    
-    
     def withdraw_money(self, user:RegisterUser, value: float):
          with Session(engine) as session:
             withdraw = session.query(TransactionModel).filter(TransactionModel.user_id == user.user_id).first()
@@ -48,12 +41,6 @@ print('ola')
                 session.commit()
 
 
-    
-    
-    
-    
-    
-    
     
     def transfer(self, user:RegisterUser, cpf, value):
 
