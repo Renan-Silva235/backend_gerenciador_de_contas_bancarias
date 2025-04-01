@@ -1,4 +1,5 @@
 from sqlmodel import SQLModel, Field, create_engine
+from decimal import Decimal
 
 
 class RegisterUser(SQLModel, table=True):
@@ -13,7 +14,7 @@ class RegisterUser(SQLModel, table=True):
 class TransactionModel(SQLModel, table=True,):
     transaction_id: int = Field(primary_key=True)
     user_id: int = Field(foreign_key='registeruser.user_id')
-    balance: float = Field(default=0.0)
+    balance: Decimal = Field(default=0, decimal_places=2)
 
 
 sqlite_file_name = 'model/databases.db'
