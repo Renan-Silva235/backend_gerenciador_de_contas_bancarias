@@ -20,7 +20,7 @@ class TransactionModel(SQLModel, table=True,):
 sqlite_file_name = 'model/databases.db'
 connection_string = f'sqlite:///{sqlite_file_name}'
 
-engine = create_engine(connection_string, echo=True)
+engine = create_engine(connection_string, echo=False)
 
 if __name__ == '__main__':
     SQLModel.metadata.create_all(engine)
