@@ -4,19 +4,19 @@ from sqlmodel import Session
 import bcrypt
 from validations.validate_password import set_password
 from validations.validate_email import valid_email
+from validations.validate_cpf import valid_cpf
 
 
 class User:
     def register_user(self, name, cpf, email, password):
         
         with Session(engine) as session:
-
             email_validated = valid_email(email)
 
             if email_validated is None:
                 return 'E-mail-inválido'
             
-            user = RegisterUser(name=name.title(), cpf=cpf, email=email_validated, password=set_password(password))
+            user = RegisterUser(name=name.title(), cpf=valid_cpf(cpf), email=email_validated, password=set_password(password))
             session.add(user)
             session.commit()
             session.refresh(user)
