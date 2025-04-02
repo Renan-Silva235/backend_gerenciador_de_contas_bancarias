@@ -49,7 +49,7 @@ class Transaction:
             query_balance = session.query(TransactionModel).filter(TransactionModel.user_id == user.user_id).first()
 
             if query_balance:
-                if query_balance.balance >= value:
+                if query_balance.balance >= Decimal(value):
                     send_money = query_target_user(cpf, value)
 
                     if send_money is True:
