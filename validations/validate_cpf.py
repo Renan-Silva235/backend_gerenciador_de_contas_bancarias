@@ -1,6 +1,7 @@
 from sqlmodel import Session
 from model.databases import RegisterUser, engine
 from validate_docbr import CPF
+from exceptions.excecoes import CpfAlreadyExist, CpfInvalid
 
 
 class ValidCpf(CPF):
@@ -10,7 +11,7 @@ class ValidCpf(CPF):
             verify_cpf_exist = session.query(RegisterUser).filter(RegisterUser.cpf == cpf).first()
 
             if verify_cpf_exist:
-                raise Exception('Parece que já existe uma conta com esse CPF')
+                raise CpfAlreadyExist('Parece que já existe uma conta com esse CPF')
             
         return False
                 
@@ -22,7 +23,7 @@ class ValidCpf(CPF):
         if CPF().validate(cpf):
             return cpf
         else:
-            raise ValueError('CPF inválido')
+            raise CpfInvalid('CPF inválido')
         
 
 
