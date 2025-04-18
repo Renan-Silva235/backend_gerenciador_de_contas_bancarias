@@ -1,8 +1,0 @@
-
-[
-  {
-    "type": "sqlite",
-    "name": "MeuBanco",
-    "url": "./databases.db"
-  }
-]
