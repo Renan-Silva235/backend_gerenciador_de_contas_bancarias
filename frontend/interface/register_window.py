@@ -1,7 +1,8 @@
-from .interface import BaseWindow
-from .menu import MainMenu
+from .base_window import BaseWindow
 from tkinter import ttk, messagebox
 from backend.entities.user import User
+from backend.format.format_cpf import format_cpf_entry
+
 
 class RegisterWindow(BaseWindow):
     def __init__(self, parent):
@@ -32,6 +33,7 @@ class RegisterWindow(BaseWindow):
         self.cpf_label.pack(pady=10)
         self.cpf_entry = ttk.Entry(self, font=('Arial', 16))
         self.cpf_entry.pack(pady=10)
+        self.cpf_entry.bind('<KeyRelease>', lambda event: format_cpf_entry(self.cpf_entry))
 
         self.email_label = ttk.Label(self, text='Email:', font=('Arial', 16), background='#C0C0C0')
         self.email_label.pack(pady=10)
@@ -45,6 +47,9 @@ class RegisterWindow(BaseWindow):
 
         self.button = ttk.Button(self, text='Cadatrar', command=self.register_user)
         self.button.pack(pady=10)
+
+        
+
 
     def register_user(self):
         name = self.name_entry.get()
