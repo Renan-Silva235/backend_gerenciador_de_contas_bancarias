@@ -64,7 +64,7 @@ class TransactionWindow(BaseTopLevel):
                 transaction_result = self.class_transfer.transfer(self.parent.user, get_cpf, get_amount)
 
                 if transaction_result == 'Transferência concluída':
-                    messagebox.showinfo('Transferência', 'Transferência realizada com sucesso!')
+                    messagebox.showinfo('Transferência', 'Transferência realizada com sucesso!', parent=self)
                     self.destroy()
                     self.parent.deiconify()
                 else:
