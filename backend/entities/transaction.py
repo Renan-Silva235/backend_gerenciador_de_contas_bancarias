@@ -25,10 +25,9 @@ class Transaction:
             balance = session.query(TransactionModel).filter(TransactionModel.user_id == user.user_id).first()
 
             if balance:
-                return f'saldo: R${balance.balance}'
+                return balance.balance
                 
-            else:
-                return 'CPF INVÁLIDO'
+            
             
 
 
