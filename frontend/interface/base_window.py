@@ -28,13 +28,13 @@ class BaseWindow(tk.Tk):
         
 
 #         varificar o sistema operacional
-        if os.name == 'nt':
-            icon_path = 'frontend/interface/image/favicon.ico'
-            self.iconbitmap(icon_path)
-        else:
-            icon_path = '/home/rsr/Projetos/gerenciador_contas_bancarias/frontend/interface/image/emblema.png'
-            self.icon = tk.PhotoImage(file=icon_path)
-            self.tk.call('wm', 'iconphoto', self._w, self.icon)
+        # if os.name == 'nt':
+        #     icon_path = 'frontend/interface/image/favicon.ico'
+        #     self.iconbitmap(icon_path)
+        # else:
+        #     icon_path = '/home/rsr/Projetos/gerenciador_contas_bancarias/frontend/interface/image/emblema.png'
+        #     self.icon = tk.PhotoImage(file=icon_path)
+        #     self.tk.call('wm', 'iconphoto', self._w, self.icon)
 
 
         self.style = ttk.Style()

@@ -3,7 +3,7 @@ from tkinter import ttk, messagebox
 from backend.entities.user import User
 from backend.format.format_cpf import format_cpf_entry
 
-
+print('inicio')
 class RegisterWindow(BaseWindow):
     def __init__(self, parent):
         super().__init__(title='Cadastro')
@@ -49,6 +49,7 @@ class RegisterWindow(BaseWindow):
         self.button.pack(pady=10)
 
         
+    print('meio')
 
 
     def register_user(self):
@@ -78,3 +79,4 @@ class RegisterWindow(BaseWindow):
             if self.parent:
                 self.parent.deiconify()
 
+    print('fim')
