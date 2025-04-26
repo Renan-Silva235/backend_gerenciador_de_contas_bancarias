@@ -3,6 +3,7 @@ from tkinter import ttk, messagebox
 from backend.entities.user import User
 from .service_window import ServicesWindow
 from backend.format.format_cpf import format_cpf_entry
+from backend.entities.transaction import Transaction
 
 
 class MainMenu(BaseWindow):
