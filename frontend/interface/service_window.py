@@ -20,6 +20,9 @@ class ServicesWindow(BaseTopLevel):
         self.label = ttk.Label(self, text=f'Olá {self.user.name}, seja bem vindo(a) ao Banco Libras', font=('Arial', 16))
         self.label.grid(row=0, column=0, columnspan=3, pady=20, sticky='n')
 
+        self.logout_button = ttk.Button(self, text='Sair', command=self.logout, width=6)
+        self.logout_button.place(relx=1.0, rely=0.0, anchor='ne', x=-10, y=10)
+        
         self.label_balance = ttk.Label(self, text=f'Saldo: R$ {self.user_balance}', font=('Arial', 16))
         self.label_balance.grid(row=1, column=0, columnspan=3, pady=10)
         self.label_balance.grid_remove()
@@ -44,12 +47,12 @@ class ServicesWindow(BaseTopLevel):
         self.grid_columnconfigure(0, weight=1)
         self.grid_columnconfigure(1, weight=1)
         self.grid_columnconfigure(2, weight=1)
+        
 
         self.grid_rowconfigure(0, weight=1)
         self.grid_rowconfigure(1, weight=1)
         self.grid_rowconfigure(2, weight=1)
         self.grid_rowconfigure(3, weight=1)
-        self.grid_rowconfigure(4, weight=2)
        
 
     def open_transaction_window(self):
@@ -86,3 +89,7 @@ class ServicesWindow(BaseTopLevel):
         self.withdraw()
         deposit_window = DepositWindow(self)
         deposit_window.mainloop()
+
+    def logout(self):
+        self.destroy()
+        self.master.deiconify()

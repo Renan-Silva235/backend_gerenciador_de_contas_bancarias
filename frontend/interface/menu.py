@@ -1,10 +1,8 @@
 from .base_window import BaseWindow
-from tkinter import ttk, messagebox
+from tkinter import ttk
 from backend.entities.user import User
 from .service_window import ServicesWindow
 from backend.format.format_cpf import format_cpf_entry
-from backend.entities.transaction import Transaction
-from .base_top_level import BaseTopLevel
 from backend.format.custom_messagebox import custom_messagebox
 
 class MainMenu(BaseWindow):
