@@ -1,5 +1,4 @@
-from .base_window import BaseWindow
-from tkinter import ttk, messagebox
+from tkinter import ttk
 from backend.entities.user import User
 from backend.format.format_cpf import format_cpf_entry
 from .base_top_level import BaseTopLevel
