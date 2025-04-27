@@ -38,3 +38,5 @@ backend/model/databases.db
 backend/model/.dbee.json
 
 anotacoes.txt
+
+cpfs.txt
