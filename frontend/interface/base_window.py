@@ -24,7 +24,7 @@ class BaseWindow(tk.Tk):
         self.resizable(False, False)
 
         self.attributes('-topmost', 1)
-        self.configure(background='#C0C0C0')
+        self.configure(background='#800000')
         
 
 #         varificar o sistema operacional
@@ -38,10 +38,12 @@ class BaseWindow(tk.Tk):
 
 
         self.style = ttk.Style()
-        self.style.configure('tButton', background='000000', font=('Arial', 20), )
-
+        self.style.theme_use('clam')
+        self.style.configure('TButton', background='#800000', foreground='#ffffff', font=('Arial', 20))
+        self.style.configure('TLabel', foreground='#ffffff', background='#800000')
        
         self.update_idletasks()  # Atualiza o layout para obter as dimensões corretas
+
 
 
 

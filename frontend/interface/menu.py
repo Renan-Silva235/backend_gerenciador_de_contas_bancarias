@@ -5,6 +5,7 @@ from .service_window import ServicesWindow
 from backend.format.format_cpf import format_cpf_entry
 from backend.entities.transaction import Transaction
 from .base_top_level import BaseTopLevel
+from backend.format.custom_messagebox import custom_messagebox
 
 class MainMenu(BaseWindow):
     def __init__(self):
@@ -16,20 +17,20 @@ class MainMenu(BaseWindow):
     def create_widgets(self):
 
         
-        self.label = ttk.Label(self, text='Bem-Vindo ao Banco-Libras', font=('Arial', 30), background='#C0C0C0')
+        self.label = ttk.Label(self, text='Bem-Vindo ao Banco-Libras', font=('Arial', 30))
         self.label.pack(pady=20)
 
-        self.label2 = ttk.Label(self, text='Conecte suas contas, Centralize sua vida financeira em um só lugar.', font=("Arial", 16), background='#C0C0C0')
+        self.label2 = ttk.Label(self, text='Conecte suas contas, Centralize sua vida financeira em um só lugar.', font=("Arial", 16))
         self.label2.pack(pady=20)
         
         
-        self.cpf_label = ttk.Label(self, text="CPF:", font=("Arial", 16), background='#C0C0C0')
+        self.cpf_label = ttk.Label(self, text="CPF:", font=("Arial", 16))
         self.cpf_label.pack(pady=10)
         self.cpf_entry = ttk.Entry(self, font=("Arial", 16))
         self.cpf_entry.pack(pady=10)
         self.cpf_entry.bind('<KeyRelease>', lambda event: format_cpf_entry(self.cpf_entry))
         
-        self.password_label = ttk.Label(self, text="Senha:", font=("Arial", 16), background='#C0C0C0')
+        self.password_label = ttk.Label(self, text="Senha:", font=("Arial", 16))
         self.password_label.pack(pady=10)
         self.password_entry = ttk.Entry(self, font=('arial', 16), show='*')
         self.password_entry.pack(pady=10)
@@ -46,18 +47,18 @@ class MainMenu(BaseWindow):
         password = self.password_entry.get()
 
         if not cpf or not password:
-            messagebox.showerror('Erro', 'preencha todos os campos')
+            custom_messagebox(self, 'Erro', 'preencha todos os campos')
             return
         
         user = self.user.login(cpf, password)
 
         if user:
-            messagebox.showinfo('Sucesso', 'Login bem-sucedido')
+            custom_messagebox(self, 'Sucesso', 'Login bem-sucedido')
             self.withdraw()
             service_window = ServicesWindow(user)  
             service_window.mainloop()
         else:
-            messagebox.showinfo('Erro', 'Login ou senha inválidos')
+            custom_messagebox(self, 'Erro', 'Login ou senha inválidos')
 
     def register_count(self):
         from .register_window import RegisterWindow

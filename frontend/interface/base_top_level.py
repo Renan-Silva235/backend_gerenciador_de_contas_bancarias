@@ -18,10 +18,13 @@ class BaseTopLevel(Toplevel):
         self.geometry(f'{self.window_width}x{self.window_height}+{position_x}+{position_y}')
         self.resizable(False, False)
         self.attributes('-topmost', 1)
-        self.configure(background='#C0C0C0')
+        self.configure(background='#800000')
+        
 
         # Estilo para botões
         self.style = ttk.Style()
-        self.style.configure('tButton', background='000000', font=('Arial', 20))
+        self.style.theme_use('clam')
+        self.style.configure('TButton', background='#800000', foreground='#ffffff', font=('Arial', 20))
+        self.style.configure('TLabel', foreground='#ffffff', background='#800000')
 
         self.update_idletasks()

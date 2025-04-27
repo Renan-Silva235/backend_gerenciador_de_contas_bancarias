@@ -1,8 +1,8 @@
 from .base_top_level import BaseTopLevel
 from tkinter import ttk, messagebox
 from backend.entities.transaction import Transaction
-
-
+from backend.format.custom_messagebox import custom_messagebox
+from backend.format.custom_message_askyesno import custom_askyesno
 
 
 class DepositWindow(BaseTopLevel):
@@ -15,21 +15,21 @@ class DepositWindow(BaseTopLevel):
 
 
     def create_widgets(self):
-        self.deposit_introduce = ttk.Label(self, text='DEPÓSITOS', font=('Ariael', 25), background='#C0C0C0')
-        self.deposit_introduce.pack(padx=10)
+        self.deposit_introduce = ttk.Label(self, text='DEPÓSITOS', font=('Ariael', 25))
+        self.deposit_introduce.pack(pady=10)
 
 
-        self.deposit_label = ttk.Label(self, text='Quanto você deseja depositar:', font=('Ariael', 16), background='#C0C0C0')
-        self.deposit_label.pack(padx=10)
+        self.deposit_label = ttk.Label(self, text='Quanto você deseja depositar:', font=('Ariael', 16))
+        self.deposit_label.pack(pady=10)
         self.deposit_entry = ttk.Entry(self, font=('Arial', 16))
-        self.deposit_entry.pack(padx=10)
+        self.deposit_entry.pack(pady=10)
 
 
         self.deposit_button = ttk.Button(self, text='Depositar', command=self.deposit_money)
-        self.deposit_button.pack(padx=10)
+        self.deposit_button.pack(pady=10)
 
         self.cancel_button = ttk.Button(self, text='Cancelar', command=self.cancel)
-        self.cancel_button.pack(padx=10)
+        self.cancel_button.pack(pady=10)
 
 
 
@@ -38,13 +38,13 @@ class DepositWindow(BaseTopLevel):
         get_deposit = self.deposit_entry.get()
 
         if not get_deposit:
-            messagebox.showerror('Error', 'Campo inválido', parent=self)
+            custom_messagebox(self, 'Error', 'Campo inválido')
+            return
 
 
-
-        confirmation = messagebox.askyesno(
+        confirmation = custom_askyesno(self,
             'Confirmação',
-            f'Deseja depositar R$ {get_deposit}', parent=self
+            f'Deseja depositar R$ {get_deposit}'
         )
 
 
@@ -52,7 +52,7 @@ class DepositWindow(BaseTopLevel):
             deposited = self.class_transaction.deposit(self.parent.user, get_deposit)
 
             if deposited:
-                messagebox.showinfo('Sucesso', 'Depósito realizado com sucesso.', parent=self)
+                custom_messagebox(self, 'Sucesso', 'Depósito realizado com sucesso.')
 
             self.destroy()
 
