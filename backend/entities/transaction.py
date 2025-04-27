@@ -15,6 +15,9 @@ class Transaction:
                 transaction.balance += Decimal(value).quantize(Decimal('0.01'))
                 session.add(transaction)
                 session.commit()
+                return True
+            
+        return False
 
     
     
