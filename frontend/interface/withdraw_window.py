@@ -1,7 +1,8 @@
 from .base_top_level import BaseTopLevel
 from tkinter import ttk, messagebox
 from backend.entities.transaction import Transaction
-
+from backend.format.custom_messagebox import custom_messagebox
+from backend.format.custom_message_askyesno import custom_askyesno
 
 class WithdrawWindow(BaseTopLevel):
     def __init__(self, parent):
@@ -11,19 +12,19 @@ class WithdrawWindow(BaseTopLevel):
 
 
     def create_widgets(self):
-        self.label_introduce = ttk.Label(self, text='Sacar:', font=('Arial', 25), background='#C0C0C0')
+        self.label_introduce = ttk.Label(self, text='Sacar:', font=('Arial', 25))
         self.label_introduce.pack(pady=10)
 
-        self.withdraw_label = ttk.Label(self, text='Quanto você deseja sacar?', font=('Arial', 16), background='#C0C0C0')
-        self.withdraw_label.pack(padx=10)
+        self.withdraw_label = ttk.Label(self, text='Quanto você deseja sacar?', font=('Arial', 16))
+        self.withdraw_label.pack(pady=10)
         self.withdraw_entry = ttk.Entry(self, font=('Arial', 16))
-        self.withdraw_entry.pack(padx=10)
+        self.withdraw_entry.pack(pady=10)
 
         self.button_withdraw = ttk.Button(self, text='Sacar', command=self.withdraw_cash)
-        self.button_withdraw.pack(padx=10)
+        self.button_withdraw.pack(pady=10)
 
         self.button_cancel = ttk.Button(self, text='voltar', command=self.back)
-        self.button_cancel.pack(padx=10)
+        self.button_cancel.pack(pady=10)
 
     def withdraw_cash(self):
         get_amount = self.withdraw_entry.get()
@@ -31,11 +32,11 @@ class WithdrawWindow(BaseTopLevel):
 
 
         if not get_amount:
-            messagebox.showerror('Error', 'campo inválido.', parent=self)
+            custom_messagebox(self, 'Error', 'campo inválido.')
 
-        confirmation = messagebox.askyesno(
+        confirmation = custom_askyesno(self,
             'Confirmação',
-            f'Você realmente deseja sacar R$ {get_amount:.2f}', parent=self
+            f'Você realmente deseja sacar R$ {get_amount}'
         )
 
 
@@ -44,9 +45,9 @@ class WithdrawWindow(BaseTopLevel):
             withdraw_money = class_transaction.withdraw_money(self.parent.user, get_amount)
 
             if withdraw_money == False:
-                messagebox.showerror('Error', 'Saldo insuficiente', parent=self)
+                custom_messagebox(self, 'Error', 'Saldo insuficiente')
             else:
-                messagebox.showinfo('Sucesso', 'Valor sacado com sucesso', parent=self)
+                custom_messagebox(self, 'Sucesso', 'Valor sacado com sucesso')
                 self.destroy()
 
                 if self.parent:

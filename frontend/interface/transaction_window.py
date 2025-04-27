@@ -3,7 +3,8 @@ from ..interface.base_top_level import BaseTopLevel
 from backend.entities.transaction import Transaction
 from backend.query.query_target_user import query_target_user
 from backend.format.format_cpf import format_cpf_entry
-
+from backend.format.custom_messagebox import custom_messagebox
+from backend.format.custom_message_askyesno import custom_askyesno
 
 class TransactionWindow(BaseTopLevel):
     def __init__(self, parent):
@@ -39,7 +40,7 @@ class TransactionWindow(BaseTopLevel):
         get_amount = self.amount_entry.get()
 
         if not get_cpf or not get_amount:   
-            messagebox.showerror('Transferência', 'Por favor, insira um valor para a transferência.')
+            custom_messagebox(self, 'Transferência', 'Por favor, insira um valor para a transferência.')
             return
 
         try:
@@ -48,26 +49,26 @@ class TransactionWindow(BaseTopLevel):
             recipient_name = query_target_user(get_cpf)
 
             if recipient_name is False:
-                messagebox.showerror('Transferência', 'CPF do destinatário inválido.')
+                custom_messagebox(self, 'Transferência', 'CPF do destinatário inválido.')
                 return
 
-            confirmation = messagebox.askyesno(
+            confirmation = custom_askyesno(self,
                 'Confirmação', 
                 f'Transferir R$ {get_amount} para {recipient_name.name}, \n '
-                  f'cpf: ********{recipient_name.cpf[10:]}', parent=self
+                  f'cpf: ********{recipient_name.cpf[10:]}'
             )
 
             if confirmation:
                 transaction_result = self.class_transfer.transfer(self.parent.user, get_cpf, get_amount)
 
                 if transaction_result == 'Transferência concluída':
-                    messagebox.showinfo('Transferência', 'Transferência realizada com sucesso!', parent=self)
+                    custom_messagebox(self, 'Transferência', 'Transferência realizada com sucesso!')
                     self.destroy()
                     self.parent.deiconify()
                 else:
-                    messagebox.showerror('Transferência', transaction_result)
+                    custom_messagebox(self, 'Transferência', transaction_result)
         except Exception as error:
-            messagebox.showerror('Transferência', f'Ocorreu um erro: {error}')
+            custom_messagebox(self, 'Transferência', f'Ocorreu um erro: {error}')
             return
     
     def cancel(self):
