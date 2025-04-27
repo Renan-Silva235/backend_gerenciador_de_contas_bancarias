@@ -33,13 +33,15 @@ class Transaction:
 
     def withdraw_money(self, user:RegisterUser, value: str):
          with Session(engine) as session:
-            withdraw = session.query(TransactionModel).filter(TransactionModel.user_id == user.user_id).first()
+            query_balance = session.query(TransactionModel).filter(TransactionModel.user_id == user.user_id).first()
 
-            if withdraw:
-                withdraw.balance -= Decimal(value).quantize(Decimal('0.01'))
-                session.add(withdraw)
-                session.commit()
-
+            if query_balance:
+                if query_balance.balance >= Decimal(value):
+                    query_balance.balance -= Decimal(value).quantize(Decimal('0.01'))
+                    session.add(query_balance)
+                    session.commit()
+                else:
+                    return False
 
     
     def transfer(self, user:RegisterUser, cpf, value: str):
