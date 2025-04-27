@@ -33,6 +33,7 @@ class WithdrawWindow(BaseTopLevel):
 
         if not get_amount:
             custom_messagebox(self, 'Error', 'campo inválido.')
+            return
 
         confirmation = custom_askyesno(self,
             'Confirmação',

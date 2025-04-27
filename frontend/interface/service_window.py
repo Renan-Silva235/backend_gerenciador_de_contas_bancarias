@@ -18,25 +18,39 @@ class ServicesWindow(BaseTopLevel):
 
     def create_widgets(self):
         self.label = ttk.Label(self, text=f'Olá {self.user.name}, seja bem vindo ao Banco Libras', font=('Arial', 16))
-        self.label.grid(row=0, column=0, columnspan=3, pady=20)
-
-        self.button_transfer = ttk.Button(self, text='Transferir', command=self.open_transaction_window)
-        self.button_transfer.grid(row=1, column=0, padx=10, pady=10)
+        self.label.grid(row=0, column=0, columnspan=3, pady=20, sticky='n')
 
         self.label_balance = ttk.Label(self, text=f'Saldo: R$ {self.user_balance}', font=('Arial', 16))
-        self.label_balance.grid(row=3, column=0, columnspan=3, pady=10)
-        self.label_balance.grid_remove() 
-        
+        self.label_balance.grid(row=1, column=0, columnspan=3, pady=10)
+        self.label_balance.grid_remove()
+
         self.show_balance = False
         self.button_balance = ttk.Button(self, text='Mostrar saldo', command=self.toggle_balance)
         self.button_balance.grid(row=2, column=0, columnspan=3, pady=10)
 
-        self.button_withdraw = ttk.Button(self, text='Saque', command=self.open_withdraw_window)
-        self.button_withdraw.grid(row=1, column=1, padx=10, pady=10)
+        # Frame para centralizar os botões de ação
+        self.button_frame = ttk.Frame(self)
+        self.button_frame.grid(row=3, column=0, columnspan=3, pady=20)
 
-        self.button_deposit = ttk.Button(self, text='Depositar', command=self.deposit)
-        self.button_deposit.grid(row=1, column=2, padx=10, pady=10)
+        self.button_transfer = ttk.Button(self.button_frame, text='Transferir', command=self.open_transaction_window)
+        self.button_transfer.grid(row=0, column=0, padx=10, pady=10)
 
+        self.button_withdraw = ttk.Button(self.button_frame, text='Saque', command=self.open_withdraw_window)
+        self.button_withdraw.grid(row=0, column=1, padx=10, pady=10)
+
+        self.button_deposit = ttk.Button(self.button_frame, text='Depositar', command=self.deposit)
+        self.button_deposit.grid(row=0, column=2, padx=10, pady=10)
+
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_columnconfigure(1, weight=1)
+        self.grid_columnconfigure(2, weight=1)
+
+        self.grid_rowconfigure(0, weight=1)
+        self.grid_rowconfigure(1, weight=1)
+        self.grid_rowconfigure(2, weight=1)
+        self.grid_rowconfigure(3, weight=1)
+        self.grid_rowconfigure(4, weight=2)
+       
 
     def open_transaction_window(self):
         self.withdraw()

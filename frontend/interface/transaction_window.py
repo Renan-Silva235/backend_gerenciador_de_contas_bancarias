@@ -49,7 +49,7 @@ class TransactionWindow(BaseTopLevel):
             recipient_name = query_target_user(get_cpf)
 
             if recipient_name is False:
-                custom_messagebox(self, 'Transferência', 'CPF do destinatário inválido.')
+                custom_messagebox(self, 'Transferência', 'CPF do destinatário inválido.', width=400)
                 return
 
             confirmation = custom_askyesno(self,

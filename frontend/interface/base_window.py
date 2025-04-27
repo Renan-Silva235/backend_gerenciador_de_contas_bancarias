@@ -39,6 +39,7 @@ class BaseWindow(tk.Tk):
 
         self.style = ttk.Style()
         self.style.theme_use('clam')
+        self.style.configure('TFrame', background='#800000', foreground='#ffffff', font=('Arial', 20))
         self.style.configure('TButton', background='#800000', foreground='#ffffff', font=('Arial', 20))
         self.style.configure('TLabel', foreground='#ffffff', background='#800000')
        

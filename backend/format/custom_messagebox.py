@@ -5,7 +5,7 @@ from tkinter import ttk
 def custom_messagebox(parent, title='mensagem', message='mensagem exibida'):
     popup = tk.Toplevel(parent)
     popup.title(title)
-    popup.geometry('300x150')
+    popup.geometry('390x150')
     popup.configure(background='#800000')
     popup.resizable(False, False)
     popup.attributes('-topmost', 1)
