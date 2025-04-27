@@ -4,6 +4,9 @@ from backend.entities.user import User
 from backend.format.format_cpf import format_cpf_entry
 from .base_top_level import BaseTopLevel
 from backend.format.custom_messagebox import custom_messagebox
+from backend.exceptions.excecoes import CpfAlreadyExist, PasswordDoNotMatch, CpfInvalid, EmailInvalid
+
+
 
 class RegisterWindow(BaseTopLevel):
     def __init__(self, parent):
@@ -43,8 +46,18 @@ class RegisterWindow(BaseTopLevel):
 
         self.password_label = ttk.Label(self, text='Senha:', font=('Arial', 16))
         self.password_label.pack(pady=10)
-        self.password_entry = ttk.Entry(self, font=('Arial', 16))
+        self.password_entry = ttk.Entry(self, font=('Arial', 16), show='*')
         self.password_entry.pack(pady=10)
+        self.tip_label = ttk.Label(self, text='*A senha deve conter: \n Apenas números e dever ter apenas 4 dígitos. \n sem caracteres especiais: @, $, $', font=('Arial', 10))
+        self.tip_label.pack(pady=10)
+
+
+
+        self.confirm_password_label = ttk.Label(self, text='Redigite a Senha:', font=('Arial', 16))
+        self.confirm_password_label.pack(pady=10)
+        self.confirm_password_entry = ttk.Entry(self, font=('Arial', 16), show='*')
+        self.confirm_password_entry.pack(pady=10)
+
 
         self.button = ttk.Button(self, text='Cadatrar', command=self.register_user)
         self.button.pack(pady=10)
@@ -61,28 +74,42 @@ class RegisterWindow(BaseTopLevel):
         cpf = self.cpf_entry.get()
         email = self.email_entry.get()
         password = self.password_entry.get()
+        confirm_password = self.confirm_password_entry.get()
 
         if not name or not cpf or not email or not password:
             custom_messagebox(self, 'Erro', 'Por favor, preencha todos os campos.')
             return
         
-        register = self.user.register_user(name, cpf, email, password)
-
-        if register == 'E-mail-inválido':
-            custom_messagebox(self, 'Erro', 'E-mail inválido.')
-        elif register == 'senha inválida':
-            custom_messagebox(self, 'Erro', 'Senha inválida.')
-        elif register == 'cpf inválido':
-            custom_messagebox(self, 'Erro', 'CPF inválido.')
-        elif register == 'CPF já cadastrado':
-            custom_messagebox(self, 'Erro', 'Esse CPF já está cadastrado.')
-        else:
-            custom_messagebox(self, 'Sucesso', 'Usuário cadastrado com sucesso!')
-            self.destroy()
+        try:
             
-            if self.parent:
-                self.parent.deiconify()
+            register = self.user.register_user(name, cpf, email, password, confirm_password)
 
+            if register == 'E-mail inválido':
+                custom_messagebox(self, 'Error', 'E-mail inválido.')
+            elif register == 'senha inválida':
+                custom_messagebox(self, 'Error', 'Senha inválida.')
+            elif register == 'cpf inválido':
+                custom_messagebox(self, 'Error', 'CPF inválido.')
+            elif register == 'CPF já cadastrado':
+                custom_messagebox(self, 'Error', 'Esse CPF já está cadastrado.')
+            elif register == 'As senhas não coincidem':
+                custom_messagebox(self, 'Error', 'As senhas não coincidem.')
+            else:
+                custom_messagebox(self, 'Sucesso', 'Usuário cadastrado com sucesso!')
+                self.destroy()
+                
+                if self.parent:
+                    self.parent.deiconify()
+        except CpfAlreadyExist as error:
+            custom_messagebox(self, 'Error', str(error))
+        except CpfInvalid as error:
+            custom_messagebox(self, 'Error', str(error))
+        except ValueError as error:
+            custom_messagebox(self, 'Error', str(error))
+        except PasswordDoNotMatch as error:
+            custom_messagebox(self, 'Error', str(error))
+        except EmailInvalid as error:
+            custom_messagebox(self, 'Error', str(error))
 
     def exit(self):
         self.destroy()

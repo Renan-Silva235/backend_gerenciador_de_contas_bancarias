@@ -7,15 +7,14 @@ from backend.validations.validate_email import valid_email
 from backend.validations.validate_cpf import valid_cpf
 
 class User:
-    def register_user(self, name, cpf, email, password):
+    def register_user(self, name, cpf, email, password, confirm_password):
         
         with Session(engine) as session:
             email_validated = valid_email(email)
-
-            if email_validated is None:
-                return 'E-mail-inválido'
+            password_validated = set_password(password, confirm_password)
             
-            user = RegisterUser(name=name.title(), cpf=valid_cpf(cpf), email=email_validated, password=set_password(password))
+            
+            user = RegisterUser(name=name.title(), cpf=valid_cpf(cpf), email=email_validated, password=password_validated)
             session.add(user)
             session.commit()
             session.refresh(user)

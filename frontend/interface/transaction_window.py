@@ -39,8 +39,13 @@ class TransactionWindow(BaseTopLevel):
         get_cpf = self.cpf_entry.get()
         get_amount = self.amount_entry.get()
 
-        if not get_cpf or not get_amount:   
-            custom_messagebox(self, 'Transferência', 'Por favor, insira um valor para a transferência.')
+
+        if not get_cpf:
+            custom_messagebox(self, 'Error', 'Insira o CPF do destinatário.')
+            return
+
+        if not get_amount:   
+            custom_messagebox(self, 'Error', 'Por favor, insira um valor para a transferência.')
             return
 
         try:

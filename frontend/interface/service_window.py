@@ -17,7 +17,7 @@ class ServicesWindow(BaseTopLevel):
 
 
     def create_widgets(self):
-        self.label = ttk.Label(self, text=f'Olá {self.user.name}, seja bem vindo ao Banco Libras', font=('Arial', 16))
+        self.label = ttk.Label(self, text=f'Olá {self.user.name}, seja bem vindo(a) ao Banco Libras', font=('Arial', 16))
         self.label.grid(row=0, column=0, columnspan=3, pady=20, sticky='n')
 
         self.label_balance = ttk.Label(self, text=f'Saldo: R$ {self.user_balance}', font=('Arial', 16))
