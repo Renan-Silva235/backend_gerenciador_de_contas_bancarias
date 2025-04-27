@@ -35,12 +35,3 @@ def valid_cpf(cpf):
     return cpf_veryfied or cpf_valided
 
 
-
-
-    
-
-
-
-
-
-
