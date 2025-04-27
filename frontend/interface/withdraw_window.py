@@ -29,6 +29,10 @@ class WithdrawWindow(BaseTopLevel):
         get_amount = self.withdraw_entry.get()
         class_transaction = Transaction()
 
+
+        if not get_amount:
+            messagebox.showerror('Error', 'campo inválido.', parent=self)
+
         confirmation = messagebox.askyesno(
             'Confirmação',
             f'Você realmente deseja sacar R$ {get_amount:.2f}', parent=self
