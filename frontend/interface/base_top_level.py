@@ -1,7 +1,7 @@
 from tkinter import ttk, Toplevel
 
 class BaseTopLevel(Toplevel):
-    def __init__(self, title='Painel do usuário', width=800, height=600):
+    def __init__(self, title='Painel do usuário', width=1010, height=900):
         super().__init__()
         self.title(title)
 

@@ -2,9 +2,9 @@ from .base_window import BaseWindow
 from tkinter import ttk, messagebox
 from backend.entities.user import User
 from backend.format.format_cpf import format_cpf_entry
+from .base_top_level import BaseTopLevel
 
-print('inicio')
-class RegisterWindow(BaseWindow):
+class RegisterWindow(BaseTopLevel):
     def __init__(self, parent):
         super().__init__(title='Cadastro')
         self.parent = parent
@@ -48,8 +48,11 @@ class RegisterWindow(BaseWindow):
         self.button = ttk.Button(self, text='Cadatrar', command=self.register_user)
         self.button.pack(pady=10)
 
+        self.cancel_button = ttk.Button(self, text='sair', command=self.exit)
+        self.cancel_button.pack(pady=10)
+          
+
         
-    print('meio')
 
 
     def register_user(self):
@@ -79,4 +82,10 @@ class RegisterWindow(BaseWindow):
             if self.parent:
                 self.parent.deiconify()
 
-    print('fim')
+
+    def exit(self):
+        self.destroy()
+        if self.parent:
+            self.parent.after(100, self.parent.deiconify)
+        
+    

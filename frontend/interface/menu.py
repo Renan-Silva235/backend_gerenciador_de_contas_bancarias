@@ -4,7 +4,7 @@ from backend.entities.user import User
 from .service_window import ServicesWindow
 from backend.format.format_cpf import format_cpf_entry
 from backend.entities.transaction import Transaction
-
+from .base_top_level import BaseTopLevel
 
 class MainMenu(BaseWindow):
     def __init__(self):
@@ -61,9 +61,12 @@ class MainMenu(BaseWindow):
 
     def register_count(self):
         from .register_window import RegisterWindow
-        self.iconify()
-        register_window = RegisterWindow(self)
+        self.withdraw()
+        # Passar a referência correta da janela pai
+        register_window = RegisterWindow(parent=self)
         register_window.mainloop()
+
+        
     
            
        

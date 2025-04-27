@@ -31,7 +31,7 @@ class TransactionWindow(BaseTopLevel):
 
         self.transfer_button = ttk.Button(self, text='Transferir', command=self.transfer)
         self.transfer_button.pack(pady=20)
-        self.cancel_button = ttk.Button(self, text='Cancelar', command=self.destroy)
+        self.cancel_button = ttk.Button(self, text='Cancelar', command=self.cancel)
         self.cancel_button.pack(pady=20)
 
     def transfer(self):
@@ -72,3 +72,11 @@ class TransactionWindow(BaseTopLevel):
         except Exception as error:
             messagebox.showerror('Transferência', f'Ocorreu um erro: {error}')
             return
+    
+    def cancel(self):
+        self.destroy()
+
+        if self.parent:
+            self.parent.deiconify()
+
+
