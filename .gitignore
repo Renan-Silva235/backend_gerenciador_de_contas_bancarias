@@ -21,9 +21,7 @@ pyvenv.cfg
 .vscode/
 .idea/
 
-# Arquivos de teste
-teste1.py
-teste2.py
+
 
 # Arquivos do sistema
 .DS_Store
@@ -37,6 +35,6 @@ Thumbs.db
 backend/model/databases.db
 backend/model/.dbee.json
 
-anotacoes.txt
+
 
 cpfs.txt
