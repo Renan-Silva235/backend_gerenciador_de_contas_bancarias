@@ -31,7 +31,7 @@ class WithdrawWindow(BaseTopLevel):
 
         confirmation = messagebox.askyesno(
             'Confirmação',
-            f'Você realmente deseja sacar R$ {get_amount}', parent=self
+            f'Você realmente deseja sacar R$ {get_amount:.2f}', parent=self
         )
 
 
