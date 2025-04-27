@@ -45,14 +45,12 @@ class TransactionWindow(BaseTopLevel):
         try:
             
 
-            # Obter o nome do destinatário sem realizar a transferência
             recipient_name = query_target_user(get_cpf)
 
             if recipient_name is False:
                 messagebox.showerror('Transferência', 'CPF do destinatário inválido.')
                 return
 
-            # Confirmação com o nome do destinatário
             confirmation = messagebox.askyesno(
                 'Confirmação', 
                 f'Transferir R$ {get_amount} para {recipient_name.name}, \n '
@@ -60,7 +58,6 @@ class TransactionWindow(BaseTopLevel):
             )
 
             if confirmation:
-                # Realizar a transferência após a confirmação
                 transaction_result = self.class_transfer.transfer(self.parent.user, get_cpf, get_amount)
 
                 if transaction_result == 'Transferência concluída':
