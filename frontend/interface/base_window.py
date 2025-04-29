@@ -1,6 +1,5 @@
 import tkinter as tk
 from tkinter import ttk
-import os
 
 class BaseWindow(tk.Tk):
     def __init__(self, title='Banco-Libras', width=1010, height=900):

@@ -1,5 +1,5 @@
 from .base_top_level import BaseTopLevel
-from tkinter import ttk, messagebox
+from tkinter import ttk
 from backend.entities.transaction import Transaction
 from backend.format.custom_messagebox import custom_messagebox
 from backend.format.custom_message_askyesno import custom_askyesno

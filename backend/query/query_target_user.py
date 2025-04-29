@@ -1,6 +1,6 @@
-from backend.model.databases import RegisterUser, TransactionModel, engine
+from backend.model.databases import RegisterUser, engine
 from sqlmodel import Session
-from decimal import Decimal
+
 
 def query_target_user(cpf:str) :
     with Session(engine) as target_session:
