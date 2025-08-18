@@ -34,7 +34,8 @@ Thumbs.db
 
 backend/model/databases.db
 backend/model/.dbee.json
-
-
-
+build/*
+dist/*
+venv/*
+main.spec
 cpfs.txt
