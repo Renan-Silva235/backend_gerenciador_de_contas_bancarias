@@ -5,6 +5,7 @@ from .service_window import ServicesWindow
 from backend.format.format_cpf import format_cpf_entry
 from backend.format.custom_messagebox import custom_messagebox
 
+
 class MainMenu(BaseWindow):
     def __init__(self):
         super().__init__(title='Login')
@@ -67,9 +68,9 @@ class MainMenu(BaseWindow):
 
         
     
-           
-       
-
-if __name__ == "__main__":
+def main():
     app = MainMenu()
     app.mainloop()
+
+    if __name__ == "__main__":
+        main()

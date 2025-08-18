@@ -1,6 +1,6 @@
 from sqlmodel import SQLModel, Field, create_engine
 from decimal import Decimal
-
+import os
 
 class RegisterUser(SQLModel, table=True):
     user_id: int = Field(primary_key=True)
@@ -17,10 +17,15 @@ class TransactionModel(SQLModel, table=True,):
     balance: Decimal = Field(default=0, decimal_places=2)
 
 
-sqlite_file_name = 'backend/model/databases.db'
-connection_string = f'sqlite:///{sqlite_file_name}'
+# define uma pasta fixa no HOME do usuário
+base_dir = os.path.expanduser("./.env")
+os.makedirs(base_dir, exist_ok=True)
 
-engine = create_engine(connection_string, echo=False)
+# caminho do banco
+sqlite_file_name = os.path.join(base_dir, "databases.db")
+connection_string = f"sqlite:///{sqlite_file_name}"
+
+engine = create_engine(connection_string, echo=True)
 
 if __name__ == '__main__':
     SQLModel.metadata.create_all(engine)
